@@ -1,0 +1,66 @@
+/*專門給主畫面的*/
+
+/*所有元素皆依循此規則*/
+
+/*
+*{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+*/
+
+.background_image{
+    position: relative; /*整個視窗的相對位置*/
+    background: url(./index_image/Dama20141207-004.JPG);
+    background-repeat: no-repeat;
+    background-size: cover; /*cover跟x-dimension的100%效果一樣*/
+    background-position: center top; /*先水平再鉛直*/
+    background-attachment: fixed; /*不要拖移*/
+    height: 100%; /*高度填滿*/
+
+
+}
+.box{
+    position: absolute;
+
+}
+.card{
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    width: 100px;
+    height: 150px;
+}
+
+
+
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    font-family: 'serif';
+}
+
+p {
+    text-align: center;
+    font-size: 50px;
+}
+
+.button_to_homepage {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 40px;
+    font-family: 'Cambria';
+    color: white;
+    background-color: rgba(8, 104, 80, 0.7);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 10px 10px 20px rgb(0, 0, 0); /*向 y向 柔度 顏色*/
+    /*flex 柔性*/
+    transition: all 500ms;
+}
+.button_to_homepage:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+}
