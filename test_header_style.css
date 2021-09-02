@@ -1,5 +1,6 @@
 /*給普通頁面的*/
 /*可以隨著視窗、使用平台的大小的單位要注意一下，例如Size相關的用vh, vw, %...etc，然後在html開meta scale=1.0*/
+/*用vh統一控制大多的東西*/
 
 body {
     margin: 0;
@@ -9,104 +10,122 @@ body {
 }
 
 .menubar {
-    width: 80vw;    /*這是margin-right的替代方案*/
+    /*控制橫條的相對大小，但是只靠margin-right會抓錯，抓到下方文字長度的比例，所以替代方案是width*/
+    width: 80vw;
     height: 10vh;
-    margin-left: 10vw;
-    /*margin-right: 10vw;*/ /*這個會跟position:fixed打架*/
     margin-top: 2.5vh;
-    background-color: rgba(9, 153, 153, 0.5);
+    margin-left: 10vw;
+    margin-right: 10vw;
+    /* 控制形狀、顏色、陰影、渲染*/
     border-radius: 5vh;
-    /*overflow: hidden;  /*把跑到框框外面的東西都藏起來*/
-    position: fixed;    /*這條永遠固定在上方*/
+    background-color: rgba(9, 153, 153, 0.5);
     box-shadow: 0 0 2.5vh;
     backdrop-filter: blur(2px);
+    /*固定橫條在最上方，「overflow: hidden;」本來隱藏橫條外的東西，但考量視窗縮小會有東西被蓋住，所以還是不要啟用*/
+    position: fixed;
+    /*動畫很Q*/    
     transition: all 500ms;
 }
-
-div .logo_and_title_on_left {
+div.logo_button {
+    /*排在橫條左側，尺寸跟著橫條走*/
     float: left;
     height: 10vh;
-    border-top-left-radius: 5vh;
-    border-bottom-left-radius: 5vh;
-    text-align: center;
-    margin-left: 0vw;
-    padding-right: 1.25vw;
+    margin-left: 10vh;
+    /*動畫很Q*/    
     transition: all 500ms;
 }
-.logo_and_title_on_left a {
-    display: flex;
+div.logo_button > a {
+    /*不要讓超連結出現底線*/
     text-decoration: none;    
 }
-.logo_and_title_on_left a img{
-    /*src: url("./logo.JPG");*/ /*前面html我先放了*/
+div.logo_button > a > img{
+    /*「src: url("./logo.JPG");」我丟在html裡，大小跟著橫條走*/
     width: auto;
     height: 10vh;
-    margin-left: 5vw;
 }
-.logo_and_title_on_left a div{
-    /*src: url("./logo.JPG");*/ /*前面html我先放了*/
-    width: auto;
-    height: 100%;
-    margin-left: 1.25vh;
-    margin-top: 1.25vh;
-    /*margin-bottom: 1.25vh;*/  /*上下對齊太難用*/
-    font-size: 3vh;
-    color: aliceblue;
-    font-family: 'Candara';
-    font-weight: 500;
-}
-.logo_and_title_on_left:hover {
+div.logo_button:hover {
+    /*滑鼠來了，炫技一下*/
     background-color: rgba(255, 136, 0, 0.7);
-    border-top-left-radius: 5vh;
-    border-bottom-left-radius: 5vh;
-    filter: brightness(150%);
+    filter: brightness(120%);
+    /*亮起來*/ 
     transition: all 500ms;
 }
 
-div.links_on_right {
+div.links_buttons {
+    /*排在橫條左側，尺寸跟著橫條走，希望按鈕都在正中間，所以框架大小先定住*/
+    float: right;
+    margin-right: 5vh;
     height: 10vh;
+    /*動畫很Q*/   
     transition: all 500ms;
 }
 .main_navigation {
-    float: right;
-    list-style: none;
-    margin-top: 3vh;
+    /*控制高度、控制文字在按鈕中間，但視窗放大125%以上會跑掉*/
+    /*height: 10vh;*/
+    padding: 0;
+    /*我們先用「.try_to_set_center」來控制位置的問題*/
+    margin: 0;
+    /*margin-top: 3vh;*/
+    /*margin-bottom: 3vh;*/
 }
 .main_navigation li {
-    display: inline;
-    margin-inline-end: 20px;
-    /*vertical-align: middle;*/ /*這個沒屁用不知道為啥*/
+    /*列表不要痘痘、列表橫著排列，每個單元間隔右邊2vh，但是「vertical-align: middle;」並沒辦法將文字塞在正中間*/
+    list-style: none;
+    display: inline-flex;
+    margin-right: 2vh;
 }
 .main_navigation li a {
+    /*這邊的控制很多都是手動，因為太難控制了*/
     text-decoration: none;
+    height: 4vh;
     font-family: Candara;
     color: aliceblue;
     font-size: 3vh;
     transition: all 500ms;
 }
 .main_navigation li a:hover{
+    /*滑鼠過去的時候，來一點Q的動畫*/
     color: black;
-    border-radius: 50px;
-    padding-inline: 15px;
+    border-radius: 3vh;
+    padding-inline: 2vh;
     background: rgba(207, 250, 230, 0.7);
     transition: all 500ms;
 }
 
-/*預設狀態的選單按鈕不要出現*/
+div.try_to_set_center {
+    /*只能靠這個控制按鈕在中間啦，讚*/
+    height: 3vh;
+}
+
 label.menu_button {
-    padding: 1vh;
+    /*預設狀態的選單按鈕不要出現，「vertical-align: middle;」依然沒用*/
     display: none;
     float: right;
     margin-right: 5vh;
-    margin-top: 2vh;
-    size: 3vh;
+    /*margin-block: 3vh;*/
+   /* width: auto;
+    height: 4vh;*/
+    size: 4vh;
+    padding: 1vh;
+
 }
 #toggle {
+    /*真正的checkbox從頭到尾都不要出來*/
     display: none;
 }
 
 /*寬度太小，例如手機*/
 @media screen and (max-width:700px) {
+    .menubar {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    div.logo_button {
+        margin-left: 5vh;
+    }
     label.menu_button {
         display: block;
         cursor: pointer;
@@ -114,26 +133,56 @@ label.menu_button {
         transition: all 500ms;
     }
     label.menu_button:hover {
-        border-radius: 3vh;
+        border-radius: 5vh;
         background-color: rgba(207, 250, 230, 0.7);
         transition: all 500ms;
     }
     .main_navigation {
-        text-align: center;
-        width: 50%;
-        display: none;  /*沒事的話藏起來*/
+        /*列表往下面跑了，然後margin-top用10vh好像不符合瀏覽器的顯示邏輯*/
+        margin-top: 10vh;
+        margin-right: 0;
+        text-align: right;
+        width: 120%;
+         /*沒事的話先藏起來*/
+        display: none; 
+    }
+    .main_navigation li {
+        /*列表改走直的*/
+        display: block;
+        list-style: none;
+        margin-right: 0;
     }
     .main_navigation li a {
+        /*同樣大小的格子呈現*/
         display: block;
         font-size: 5vh;
+        height: 7.5vh;
         background: rgba(9, 153, 153, 0.5);
+        padding-right: 2vh;
     }
+    .main_navigation li a:hover{
+        /*滑鼠過去的時候，現在不希望Q了*/
+        color: black;
+        border-radius: 0;
+        /*把原本的padding規則取代掉*/
+        padding-inline: 0;
+        padding-left: 2vh;
+        background: rgba(207, 250, 230, 0.7);
+        transition: all 500ms;
+        box-shadow: inset 2vh 0 rgba(0, 117, 72, 0.7);
+    }
+
+
+
     #toggle:checked + .main_navigation {
         display: block;
     }
 
 
-    
+    div.try_to_set_center {
+        /*只能靠這個控制按鈕在中間啦，讚*/
+        height: 2vh;
+    }
 }
 
 
