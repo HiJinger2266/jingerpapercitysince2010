@@ -1,0 +1,351 @@
+/*給普通頁面的*/
+/*可以隨著視窗、使用平台的大小的單位要注意一下，例如Size相關的用vh, vw, %...etc，然後在html開meta scale=1.0*/
+/*用vh統一控制大多的東西*/
+
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+* {
+    margin: 0;
+}
+
+/*
+body {
+
+}
+*/
+
+.menubar {
+    /*讓這個navbar放在排序最前面，不備覆蓋*/
+    top: 0;
+    z-index: 1;
+    /*控制橫條的相對大小，但是只靠margin-right會抓錯，抓到下方文字長度的比例，所以替代方案是width*/
+    width: 80vw;
+    height: 10vh;
+    margin-top: 2.5vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    /* 控制形狀、顏色、陰影、渲染*/
+    border-radius: 5vh;
+    background-color: rgba(9, 153, 153, 0.5);
+    box-shadow: 0 0 2.5vh;
+    backdrop-filter: blur(2px);
+    /*固定橫條在最上方，「overflow: hidden;」本來隱藏橫條外的東西，但考量視窗縮小會有東西被蓋住，所以還是不要啟用*/
+    position: fixed;
+    /*動畫很Q*/    
+    transition: all 500ms;
+}
+div.logo_button {
+    /*排在橫條左側，尺寸跟著橫條走*/
+    float: left;
+    height: 10vh;
+    margin-left: 10vh;
+    /*動畫很Q*/    
+    transition: all 500ms;
+}
+div.logo_button > a {
+    /*不要讓超連結出現底線*/
+    text-decoration: none;    
+}
+div.logo_button > a > img{
+    /*「src: url("./logo.JPG");」我丟在html裡，大小跟著橫條走*/
+    width: auto;
+    height: 10vh;
+}
+div.logo_button:hover {
+    /*滑鼠來了，炫技一下*/
+    background-color: rgba(255, 136, 0, 0.7);
+    filter: brightness(120%);
+    /*亮起來*/ 
+    transition: all 500ms;
+}
+
+div.links_buttons {
+    /*排在橫條左側，尺寸跟著橫條走，希望按鈕都在正中間，所以框架大小先定住*/
+    float: right;
+    margin-right: 5vh;
+    height: 10vh;
+    /*動畫很Q*/   
+    transition: all 500ms;
+}
+.main_navigation {
+    /*控制高度、控制文字在按鈕中間，但視窗放大125%以上會跑掉*/
+    /*height: 10vh;*/
+    padding: 0;
+    /*我們先用「.try_to_set_center」來控制位置的問題*/
+    margin: 0;
+    /*margin-top: 3vh;*/
+    /*margin-bottom: 3vh;*/
+}
+.main_navigation li {
+    /*列表不要痘痘、列表橫著排列，每個單元間隔右邊2vh，但是「vertical-align: middle;」並沒辦法將文字塞在正中間*/
+    list-style: none;
+    display: inline-flex;
+    margin-right: 2vh;
+}
+.main_navigation li a {
+    /*這邊的控制很多都是手動，因為太難控制了*/
+    text-decoration: none;
+    height: 4vh;
+    font-family: Candara;
+    color: aliceblue;
+    font-size: 3vh;
+    transition: all 500ms;
+}
+.main_navigation li a:hover{
+    /*滑鼠過去的時候，來一點Q的動畫*/
+    color: black;
+    border-radius: 3vh;
+    padding-inline: 2vh;
+    background: rgba(207, 250, 230, 0.7);
+    transition: all 500ms;
+}
+
+div.try_to_set_center {
+    /*只能靠這個控制按鈕在中間啦，讚*/
+    height: 3vh;
+}
+
+label.menu_button {
+    /*預設狀態的選單按鈕不要出現，「vertical-align: middle;」依然沒用*/
+    display: none;
+    float: right;
+    margin-right: 5vh;
+    /*margin-block: 3vh;*/
+   /* width: auto;
+    height: 4vh;*/
+    size: 4vh;
+    padding: 1vh;
+
+}
+#toggle {
+    /*真正的checkbox從頭到尾都不要出來*/
+    display: none;
+}
+
+/*寬度太小，例如手機*/
+@media screen and (max-width:850px) {
+    .menubar {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    div.logo_button {
+        margin-left: 5vh;
+    }
+    label.menu_button {
+        display: block;
+        cursor: pointer;
+        filter: brightness(200%);
+        transition: all 500ms;
+    }
+    label.menu_button:hover {
+        border-radius: 5vh;
+        background-color: rgba(207, 250, 230, 0.7);
+        transition: all 500ms;
+    }
+    .main_navigation {
+        /*列表往下面跑了，然後margin-top用10vh好像不符合瀏覽器的顯示邏輯*/
+        margin-top: 10vh;
+        margin-right: 0;
+        text-align: right;
+        width: 120%;
+         /*沒事的話先藏起來*/
+        display: none; 
+    }
+    .main_navigation li {
+        /*列表改走直的*/
+        display: block;
+        list-style: none;
+        margin-right: 0;
+    }
+    .main_navigation li a {
+        /*同樣大小的格子呈現*/
+        display: block;
+        font-size: 5vh;
+        height: 7.5vh;
+        background: rgba(9, 153, 153, 0.5);
+        padding-right: 2vh;
+    }
+    .main_navigation li a:hover{
+        /*滑鼠過去的時候，現在不希望Q了*/
+        color: black;
+        border-radius: 0;
+        /*把原本的padding規則取代掉*/
+        padding-inline: 0;
+        padding-left: 2vh;
+        background: rgba(207, 250, 230, 0.7);
+        transition: all 500ms;
+        box-shadow: inset 2vh 0 rgba(0, 117, 72, 0.7);
+    }
+    #toggle:checked + .main_navigation {
+        display: block;
+    }
+    div.try_to_set_center {
+        /*只能靠這個控制按鈕在中間啦，讚*/
+        height: 2vh;
+    }
+}
+
+/*--------------------------------下面是storypage----------------------------------*/
+
+.container {
+    font-family: 'Urbanist', sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*smooth scroll*/
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+.container section {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /*align-items: baseline;*/
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    /*嘗試滑動到固定點*/
+    scroll-snap-align: center;
+}
+/*控制背景必須分開進行，才能調整各自的狀況，所以底下有很多個child*/
+.container section:nth-child(1) {
+    background: url("./storypage_image/storypage_001_beibun.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(2) {
+    background: url("./storypage_image/storypage_002_xinyi-two.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(3) {
+    background: url("./storypage_image/storypage_003_xinyi-one.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(4) {
+    background: url("./storypage_image/storypage_004_president.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(5) {
+    background: url("./storypage_image/storypage_005_tianchai.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(6) {
+    background: url("./storypage_image/storypage_006_neiku.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(7) {
+    background: url("./storypage_image/storypage_007_blvd.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(8) {
+    background: url("./storypage_image/storypage_008_carrefour.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(9) {
+    background: url("./storypage_image/storypage_009_minquan.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+.container section:nth-child(10) {
+    background: url("./storypage_image/storypage_010_realistic.JPG");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: center;
+}
+
+.container section .content {
+    /*讓字串從橫條下方開始，但不是用margin啦*/
+    padding-top: 15vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    width: 30vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(1px);
+}
+
+
+div.story_button {
+    margin-block: 5vh;
+}
+
+div.story_button a.story_href{
+    padding: 2vh;
+    border-radius: 1vh;
+    text-decoration: none;
+    font-family: 'Calibri';
+    font-size: 3vh;
+    /*預設顏色*/
+    color: aliceblue;
+    /*background-color: rgba(85, 60, 60, 0.7);*/
+    box-shadow: 0.5vh 0.5vh 10px black;
+    transition: 500ms;
+}
+
+/*客製化按鈕顏色*/
+.container section:nth-child(1) a.story_href { background-color: rgba(65, 65, 65, 0.7);}
+.container section:nth-child(2) a.story_href { background-color: rgba(206, 206, 206, 0.7);}
+.container section:nth-child(3) a.story_href { background-color: rgba(59, 46, 231, 0.7);}
+.container section:nth-child(4) a.story_href { background-color: rgba(255, 153, 0, 0.7);}
+.container section:nth-child(5) a.story_href { background-color: rgba(255, 251, 0, 0.7);}
+.container section:nth-child(6) a.story_href { background-color: rgba(92, 23, 156, 0.7);}
+.container section:nth-child(7) a.story_href { background-color: rgba(233, 16, 186, 0.7);}
+.container section:nth-child(8) a.story_href { background-color: rgba(17, 236, 182, 0.7);}
+.container section:nth-child(9) a.story_href { background-color: rgba(0, 183, 255, 0.7);}
+.container section:nth-child(10) a.story_href { background-color: rgba(0, 255, 191, 0.7);}
+/*滑鼠效果要放在後面*/
+div.story_button a.story_href:hover {
+    background-color: aliceblue;
+    color: black;
+    transition: 500ms;
+}
+
+
+h1 {
+    margin-block: 1vh;
+    font-size: 7vw;
+}
+h2 {
+    margin-block: 1vh;
+    font-size: 6vw;
+}
+h3 {
+    margin-block: 1vh;
+    font-size: 5vw;
+}
+h4 {
+    margin-block: 1vh;
+    font-size: 4vw;
+}
+h5 {
+    margin-block: 1vh;
+    font-size: 3vw;
+}
+h6 {
+    margin-block: 1vh;
+    font-size: 1.5vw;
+}
+p {
+    margin-block: 1vh;
+    font-size: 1vw;
+}
